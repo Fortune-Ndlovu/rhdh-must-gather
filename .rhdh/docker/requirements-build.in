@@ -6,7 +6,6 @@
 #   uv pip compile --python-version=3.9 --python-platform=linux --generate-hashes \
 #     --output-file=requirements-build.txt requirements-build.in
 calver
-Cython
 flit-core
 hatch-vcs
 hatchling
