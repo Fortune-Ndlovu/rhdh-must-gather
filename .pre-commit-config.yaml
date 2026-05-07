@@ -20,16 +20,12 @@ repos:
           - --output-file=.rhdh/docker/requirements.txt
           - .rhdh/docker/requirements.in
         files: ^\.rhdh/docker/requirements\.(in|txt)$
-
-  - repo: local
-    hooks:
-      - id: pybuild-deps-compile
-        name: compile build requirements (.rhdh/docker)
-        entry: pybuild-deps compile --generate-hashes
-          -o .rhdh/docker/requirements-build.txt
-          .rhdh/docker/requirements.txt
-        language: python
+      - id: pip-compile
+        name: pip-compile build deps (.rhdh/docker)
         language_version: "3.14"
-        additional_dependencies: [pybuild-deps]
-        files: ^\.rhdh/docker/requirements\.txt$
-        pass_filenames: false
+        args:
+          - --allow-unsafe
+          - --generate-hashes
+          - --output-file=.rhdh/docker/requirements-build.txt
+          - .rhdh/docker/requirements-build.in
+        files: ^\.rhdh/docker/requirements-build\.(in|txt)$
