@@ -7,14 +7,12 @@
 #     --output-file=requirements-build.txt requirements-build.in
 calver
 flit-core
-hatch-vcs
 hatchling
 packaging
 pathspec
 pluggy<1.6
 poetry-core
 setuptools
-setuptools-scm<8.0
 tomli
 trove-classifiers
 typing-extensions
