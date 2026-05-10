@@ -9,6 +9,7 @@ calver
 flit-core
 hatch-vcs
 hatchling<1.22
+pluggy<1.6
 poetry-core
 setuptools
 setuptools-scm<8
