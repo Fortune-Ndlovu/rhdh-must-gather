@@ -261,7 +261,7 @@ global:
   catalogIndex:
     image:
       tag: "1.10-51"
-  # TODO(asoro): RHDHBUGS-3095: disable lightspeed plugins to avoid ghcr.io image references
+  # Disabling lightspeed as the main RHDH container is expected to fail to start anyway
   lightspeed:
     enabled: false
   dynamic:
