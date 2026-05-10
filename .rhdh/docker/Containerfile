@@ -114,6 +114,14 @@ RUN mv /usr/bin/must_gather /usr/bin/gather
 # Set environment variable from build argument
 ENV RHDH_MUST_GATHER_VERSION=$RHDH_MUST_GATHER_VERSION
 
+LABEL summary="Red Hat Developer Hub must-gather" \
+      description="A must-gather image for collecting diagnostic data from Red Hat Developer Hub deployments" \
+      io.k8s.description="A must-gather image for collecting diagnostic data from Red Hat Developer Hub deployments" \
+      io.k8s.display-name="Red Hat Developer Hub must-gather" \
+      io.openshift.tags="rhdh,must-gather" \
+      com.redhat.component="rhdh-must-gather-container" \
+      name="rhdh/rhdh-must-gather-rhel9"
+
 # Run as non-root user
 USER 1001
 
