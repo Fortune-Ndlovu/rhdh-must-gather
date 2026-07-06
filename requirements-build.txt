@@ -20,7 +20,7 @@ hatchling==1.21.1 \
     --hash=sha256:21e8c13f8458b219a91cb84e5b61c15bf786695d1c4fabc29e91e78f94bfe892 \
     --hash=sha256:bba440453a224e7d4478457fa2e8d8c3633765bafa02975a6b53b9bf917980bc
     # via
-    #   -r .rhdh/docker/requirements-build.in
+    #   -r requirements-build.in
     #   hatch-vcs
 packaging==26.2 \
     --hash=sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e \
@@ -36,7 +36,7 @@ pluggy==1.5.0 \
     --hash=sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1 \
     --hash=sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669
     # via
-    #   -r .rhdh/docker/requirements-build.in
+    #   -r requirements-build.in
     #   hatchling
 poetry-core==2.2.1 \
     --hash=sha256:97e50d8593c8729d3f49364b428583e044087ee3def1e010c6496db76bd65ac5 \
@@ -46,13 +46,13 @@ setuptools==82.0.1 \
     --hash=sha256:7d872682c5d01cfde07da7bccc7b65469d3dca203318515ada1de5eda35efbf9 \
     --hash=sha256:a59e362652f08dcd477c78bb6e7bd9d80a7995bc73ce773050228a348ce2e5bb
     # via
-    #   -r .rhdh/docker/requirements-build.in
+    #   -r requirements-build.in
     #   setuptools-scm
 setuptools-scm==7.1.0 \
     --hash=sha256:6c508345a771aad7d56ebff0e70628bf2b0ec7573762be9960214730de278f27 \
     --hash=sha256:73988b6d848709e2af142aa48c986ea29592bbcfca5375678064708205253d8e
     # via
-    #   -r .rhdh/docker/requirements-build.in
+    #   -r requirements-build.in
     #   hatch-vcs
 tomli==2.4.1 \
     --hash=sha256:01f520d4f53ef97964a240a035ec2a869fe1a37dde002b57ebc4417a27ccd853 \
