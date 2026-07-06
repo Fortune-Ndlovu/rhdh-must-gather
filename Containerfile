@@ -28,7 +28,6 @@ LABEL name="rhdh-must-gather" \
 
 # Install system packages, CLI tools, and Python for yq
 # openshift-clients: provides oc and kubectl
-# helm: Kubernetes package manager for Helm-based RHDH deployments
 RUN microdnf install -y --setopt=install_weak_deps=0 --nodocs \
     tar \
     gzip \
@@ -42,8 +41,11 @@ RUN microdnf install -y --setopt=install_weak_deps=0 --nodocs \
     util-linux \
     rsync \
     openshift-clients \
-    helm \
     && microdnf clean all
+
+# Install helm from pre-downloaded binary (no public RPM repo available;
+# downloaded before hermetic build from mirror.openshift.com)
+COPY bin/helm /usr/local/bin/helm
 
 # Install Python dependencies (yq and build backends) from pinned requirements
 COPY requirements-build.txt requirements.txt /tmp/

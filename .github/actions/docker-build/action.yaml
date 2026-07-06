@@ -67,6 +67,18 @@ runs:
         echo "HERMETO_IMAGE=quay.io/konflux-ci/hermeto:latest" >> $GITHUB_ENV
         echo "LOCAL_CACHE_DIR=./hermeto-cache/rhdh-must-gather" >> $GITHUB_ENV
 
+    - name: Download helm binary
+      shell: bash
+      run: |
+        set -ex
+        PLATFORM="${{ inputs.platform }}"
+        ARCH="${PLATFORM#*/}"
+        mkdir -p bin
+        echo "Downloading helm for ${ARCH}..."
+        curl -fsSL "https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-${ARCH}" -o bin/helm
+        chmod +x bin/helm
+        bin/helm version --short
+
     - name: Cache dependencies with hermeto
       shell: bash
       run: |
@@ -82,7 +94,7 @@ runs:
           fetch-deps --dev-package-managers \
           --source . \
           --output /cachi2/output \
-          '[{"type": "rpm", "path": "."}, {"type": "pip", "path": ".", "allow_binary": "false"}, {"type": "cargo", "path": "vendor/websocat"}]' || echo "Fetch-deps failed"
+          '[{"type": "rpm", "path": "."}, {"type": "pip", "path": ".", "allow_binary": "false"}, {"type": "cargo", "path": "vendor/websocat"}]'
         echo "::endgroup::"
 
         if [ -d ${{ env.LOCAL_CACHE_DIR }}/output ]; then
@@ -101,7 +113,7 @@ runs:
           echo "::group::Injecting files"
           podman run --rm -v "$PWD:/source:z" -v "$LOCAL_CACHE_DIR:/cachi2:z" -w /source "$HERMETO_IMAGE" \
             --log-level DEBUG \
-            inject-files /cachi2/output || echo "Inject-files failed"
+            inject-files /cachi2/output
           echo "::endgroup::"
         else
           echo "No output directory found, skipping inject-files"

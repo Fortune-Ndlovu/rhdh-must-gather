@@ -57,6 +57,35 @@ get_target_arch() {
 TARGET_ARCH="$(get_target_arch)"
 
 #######################################
+# Downloads the helm binary for the target architecture if not already present.
+# Uses the public OpenShift mirror (no RPM available in any public repo).
+#######################################
+download_helm() {
+  local component_dir="$1"
+  local bin_dir="${component_dir}/bin"
+  local helm_path="${bin_dir}/helm"
+
+  if [[ -x "${helm_path}" ]]; then
+    echo "Helm binary already present at ${helm_path}"
+    return 0
+  fi
+
+  local helm_arch
+  case "${TARGET_ARCH}" in
+    x86_64)  helm_arch="amd64" ;;
+    aarch64) helm_arch="arm64" ;;
+    *)       helm_arch="${TARGET_ARCH}" ;;
+  esac
+
+  local helm_url="https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-${helm_arch}"
+  echo "Downloading helm for ${helm_arch} from ${helm_url}..."
+  mkdir -p "${bin_dir}"
+  curl -fsSL "${helm_url}" -o "${helm_path}"
+  chmod +x "${helm_path}"
+  "${helm_path}" version --short
+}
+
+#######################################
 # Prints usage information and exits.
 #######################################
 usage() {
@@ -282,6 +311,8 @@ main() {
 
   echo "Component dir: ${resolved_component_dir}"
   echo "Local cache dir: ${local_cache_dir}"
+
+  download_helm "${resolved_component_dir}"
 
   if [[ "${no_cache}" == false ]]; then
     echo "Building cache..."

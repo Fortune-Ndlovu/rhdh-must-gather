@@ -459,13 +459,6 @@ arches:
     name: openshift-clients
     evr: 4.21.0-202605201414.p2.gfdf8dab.assembly.stream.el9
     sourcerpm: openshift-clients-4.21.0-202605201414.p2.gfdf8dab.assembly.stream.el9.src.rpm
-  - url: https://rhsm-pulp.corp.redhat.com/content/dist/layered/rhel9/aarch64/ocp-tools/4.18/os/Packages/h/helm-3.19.5-66.el9.aarch64.rpm
-    repoid: ocp-tools-4.18-for-rhel-9-aarch64-rpms
-    size: 11717977
-    checksum: sha256:afc48dd66aa4ff85da4a2236754fe9c654ba2f01169137aa18bad2d38ab1a5f8
-    name: helm
-    evr: 3.19.5-66.el9
-    sourcerpm: helm-3.19.5-66.el9.src.rpm
   source:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/source/SRPMS/Packages/l/libmpc-1.2.1-4.el9.src.rpm
     repoid: ubi-9-for-aarch64-appstream-source-rpms
@@ -689,12 +682,6 @@ arches:
     checksum: sha256:6c788387cde9c0fde5481382f3f8416e3ecbcf09c908b409b6c63358b90a399f
     name: util-linux
     evr: 2.37.4-25.el9
-  - url: https://rhsm-pulp.corp.redhat.com/content/dist/layered/rhel9/aarch64/ocp-tools/4.18/source/SRPMS/Packages/h/helm-3.19.5-66.el9.src.rpm
-    repoid: ocp-tools-4.18-for-rhel-9-aarch64-source-rpms
-    size: 13198454
-    checksum: sha256:279f3a76649cca10d3c4b64947e94ea6a026b33cf645cbd36126c4e392816eb4
-    name: helm
-    evr: 3.19.5-66.el9
   module_metadata: []
 - arch: x86_64
   packages:
@@ -1146,13 +1133,6 @@ arches:
     name: openshift-clients
     evr: 4.21.0-202605201414.p2.gfdf8dab.assembly.stream.el9
     sourcerpm: openshift-clients-4.21.0-202605201414.p2.gfdf8dab.assembly.stream.el9.src.rpm
-  - url: https://rhsm-pulp.corp.redhat.com/content/dist/layered/rhel9/x86_64/ocp-tools/4.18/os/Packages/h/helm-3.19.5-66.el9.x86_64.rpm
-    repoid: ocp-tools-4.18-for-rhel-9-x86_64-rpms
-    size: 13277362
-    checksum: sha256:5d38f28dc325aa5dd957715f8855757c2e3461d6bfaefa57066d2c5770fea959
-    name: helm
-    evr: 3.19.5-66.el9
-    sourcerpm: helm-3.19.5-66.el9.src.rpm
   source:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/source/SRPMS/Packages/l/libmpc-1.2.1-4.el9.src.rpm
     repoid: ubi-9-for-x86_64-appstream-source-rpms
@@ -1376,10 +1356,4 @@ arches:
     checksum: sha256:6c788387cde9c0fde5481382f3f8416e3ecbcf09c908b409b6c63358b90a399f
     name: util-linux
     evr: 2.37.4-25.el9
-  - url: https://rhsm-pulp.corp.redhat.com/content/dist/layered/rhel9/x86_64/ocp-tools/4.18/source/SRPMS/Packages/h/helm-3.19.5-66.el9.src.rpm
-    repoid: ocp-tools-4.18-for-rhel-9-x86_64-source-rpms
-    size: 13198454
-    checksum: sha256:279f3a76649cca10d3c4b64947e94ea6a026b33cf645cbd36126c4e392816eb4
-    name: helm
-    evr: 3.19.5-66.el9
   module_metadata: []
