@@ -47,7 +47,8 @@ jobs:
             sudo apt-get install -y dnf python3-dnf
 
             mkdir -p "${HOME}/.local/bin/"
-            python3 -m pip install --user https://github.com/konflux-ci/rpm-lockfile-prototype/archive/refs/heads/main.zip
+            # Pin to a specific commit for reproducibility
+            python3 -m pip install --user https://github.com/konflux-ci/rpm-lockfile-prototype/archive/b440696cf5e364503010d9cb41634f42bc760cf6.zip
 
             # Update PATH
             export PATH=${PATH%":${HOME}/.local/bin"}:${HOME}/.local/bin

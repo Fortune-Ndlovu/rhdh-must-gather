@@ -23,7 +23,8 @@ set -uo pipefail
 # Constants
 #######################################
 readonly LOCAL_CACHE_BASEDIR='./hermeto-cache/'
-readonly HERMETO_IMAGE='quay.io/konflux-ci/hermeto:latest'
+# renovate: datasource=docker depName=quay.io/konflux-ci/hermeto
+readonly HERMETO_IMAGE='quay.io/konflux-ci/hermeto@sha256:de5398035bee2965a275313654f51c80e213ae460b6ec5a23e32c81efd00e67b'
 
 # Target platform for cross-builds (e.g., linux/arm64, linux/amd64)
 TARGET_PLATFORM="${TARGET_PLATFORM:-}"
@@ -226,10 +227,13 @@ build_image() {
   EMPTY_DIR=$(mktemp -d)
   trap 'rm -rf "${EMPTY_DIR}"' EXIT
 
+  local version="${RHDH_MUST_GATHER_VERSION:-0.0.0-$(git describe --no-match --always --abbrev=9 --dirty --broken 2>/dev/null || echo unknown)}"
+
   podman build -t "${image}" \
     "${platform_args[@]}" \
     --network none \
     --no-cache \
+    --build-arg "RHDH_MUST_GATHER_VERSION=${version}" \
     -f "${component_dir}/Containerfile.hermeto" \
     -v "${local_cache_dir}:/cachi2" \
     -v /dev/null:/run/secrets/redhat.repo \

@@ -32,6 +32,10 @@ inputs:
     description: Path to the Containerfile to use
     required: false
     default: 'Containerfile'
+  buildArgs:
+    description: Build arguments to pass to buildah (newline-separated KEY=VALUE pairs)
+    required: false
+    default: ''
   skipArtifactUpload:
     description: Skip uploading the built image as a GitHub artifact
     required: false
@@ -64,7 +68,7 @@ runs:
     - name: Set up hermetic build variables
       shell: bash
       run: |
-        echo "HERMETO_IMAGE=quay.io/konflux-ci/hermeto:latest" >> $GITHUB_ENV
+        echo "HERMETO_IMAGE=quay.io/konflux-ci/hermeto@sha256:de5398035bee2965a275313654f51c80e213ae460b6ec5a23e32c81efd00e67b" >> $GITHUB_ENV
         echo "LOCAL_CACHE_DIR=./hermeto-cache/rhdh-must-gather" >> $GITHUB_ENV
 
     - name: Download helm binary
@@ -170,6 +174,7 @@ runs:
         platform: ${{ inputs.platform }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        build-args: ${{ inputs.buildArgs }}
         extra-args: |
           --network=none
           --volume ${{ env.LOCAL_CACHE_DIR_REALPATH }}:/cachi2:z

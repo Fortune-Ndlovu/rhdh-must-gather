@@ -92,6 +92,8 @@ jobs:
             type=raw,value=${{ steps.prep.outputs.IMAGE_TAG }}
           imageLabels: |
             org.opencontainers.image.version=${{ steps.prep.outputs.VERSION }}
+          buildArgs: |
+            RHDH_MUST_GATHER_VERSION=${{ steps.prep.outputs.VERSION }}
           skipArtifactUpload: 'true'
 
       - name: Push main tag
