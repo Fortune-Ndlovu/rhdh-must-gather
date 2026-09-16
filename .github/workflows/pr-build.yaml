@@ -189,7 +189,7 @@ jobs:
         if: needs.pr-build.outputs.image-built == 'true'
         run: |
           sudo apt-get update
-          sudo apt-get install -y jq skopeo
+          sudo apt-get install -y jq
 
       - name: Create Kind cluster
         if: needs.pr-build.outputs.image-built == 'true'
@@ -212,10 +212,12 @@ jobs:
         env:
           TAG: ${{ needs.pr-build.outputs.image-tag }}
           NAME: ${{ env.IMAGE_NAME }}
+          BASE_REF: ${{ github.base_ref }}
         run: |
           make test-e2e \
             LOCAL=false \
             FULL_IMAGE_NAME="localhost/${NAME}:${TAG}" \
+            TARGET_BRANCH="$BASE_REF" \
             HELM_SET="image.pullPolicy=Never,resources=null,dataHolder.resources=null"
 
       - name: Upload E2E must-gather output in case of failure
