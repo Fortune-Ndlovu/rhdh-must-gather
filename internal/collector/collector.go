@@ -13,14 +13,16 @@ import (
 )
 
 type Config struct {
-	Client        *kube.Client
-	BasePath      string
-	Interrupted   *atomic.Bool
-	WithSecrets   bool
-	WithHeapDumps bool
-	Env           []string
-	Since         time.Duration
-	SinceTime     string
+	Client            *kube.Client
+	BasePath          string
+	Interrupted       *atomic.Bool
+	WithSecrets       bool
+	WithHeapDumps     bool
+	Since             time.Duration
+	SinceTime         string
+	TargetNamespaces  []string
+	HeapDumpMethod    string
+	HeapDumpInstances string
 }
 
 type Collector interface {
@@ -33,11 +35,11 @@ func (c *Config) IsInterrupted() bool {
 }
 
 func (c *Config) Namespaces() []string {
-	return namespace.TargetNamespaces()
+	return c.TargetNamespaces
 }
 
 func (c *Config) ShouldInclude(ns string) bool {
-	return namespace.ShouldInclude(ns)
+	return namespace.Includes(c.TargetNamespaces, ns)
 }
 
 // ApplyLogSince sets SinceSeconds/SinceTime on opts based on the configured

@@ -18,6 +18,7 @@ import (
 	"github.com/redhat-developer/rhdh-must-gather/internal/collector"
 	"github.com/redhat-developer/rhdh-must-gather/internal/kube"
 	"github.com/redhat-developer/rhdh-must-gather/internal/log"
+	"github.com/redhat-developer/rhdh-must-gather/internal/namespace"
 	"github.com/redhat-developer/rhdh-must-gather/internal/sanitize"
 )
 
@@ -77,19 +78,19 @@ func runGather(cmd *cobra.Command, opts *gatherOptions) error {
 		return fmt.Errorf("failed to create Kubernetes client: %w", err)
 	}
 
-	env := buildEnv(opts)
-
 	since, sinceTime := resolveSince(opts)
 
 	collectorCfg := &collector.Config{
-		Client:        kubeClient,
-		BasePath:      basePath,
-		Interrupted:   &interrupted,
-		WithSecrets:   opts.withSecrets,
-		WithHeapDumps: opts.withHeapDumps,
-		Env:           env,
-		Since:         since,
-		SinceTime:     sinceTime,
+		Client:            kubeClient,
+		BasePath:          basePath,
+		Interrupted:       &interrupted,
+		WithSecrets:       opts.withSecrets,
+		WithHeapDumps:     opts.withHeapDumps,
+		Since:             since,
+		SinceTime:         sinceTime,
+		TargetNamespaces:  resolveNamespaces(opts),
+		HeapDumpMethod:    resolveHeapDumpMethod(cmd, opts),
+		HeapDumpInstances: resolveHeapDumpInstances(opts),
 	}
 
 	scripts := buildScriptList(cmd, opts)
@@ -102,18 +103,18 @@ func runGather(cmd *cobra.Command, opts *gatherOptions) error {
 	}
 	if opts.withHeapDumps {
 		heapTimeout := getEnvDefault("HEAP_DUMP_TIMEOUT", "600")
-		if opts.heapDumpInstances != "" {
+		if collectorCfg.HeapDumpInstances != "" {
 			log.Warn("Heap dump collection enabled (method: %s, timeout: %ss, instances: %s)",
-				opts.heapDumpMethod, heapTimeout, opts.heapDumpInstances)
+				collectorCfg.HeapDumpMethod, heapTimeout, collectorCfg.HeapDumpInstances)
 		} else {
 			log.Warn("Heap dump collection enabled (method: %s, timeout: %ss, all instances)",
-				opts.heapDumpMethod, heapTimeout)
+				collectorCfg.HeapDumpMethod, heapTimeout)
 		}
 		log.Warn("Heap snapshots block the Node.js event loop. Pods with short liveness probe timeouts may restart.")
 		log.Warn("Consider increasing failureThreshold or timeoutSeconds on liveness probes before collecting.")
 	}
-	if opts.namespaces != "" {
-		log.Info("Limiting collection to namespaces: %s", opts.namespaces)
+	if len(collectorCfg.TargetNamespaces) > 0 {
+		log.Info("Limiting collection to namespaces: %s", strings.Join(collectorCfg.TargetNamespaces, ", "))
 	}
 
 	for _, name := range scripts {
@@ -135,7 +136,6 @@ func runGather(cmd *cobra.Command, opts *gatherOptions) error {
 		collectPodLogs(ctx, kubeClient, basePath)
 	}
 
-	syscall.Sync()
 	return nil
 }
 
@@ -201,6 +201,8 @@ func resolveSince(opts *gatherOptions) (time.Duration, string) {
 		parsed, err := time.ParseDuration(since)
 		if err != nil {
 			log.Warn("Ignoring invalid since value %q: %v", since, err)
+		} else if parsed <= 0 {
+			log.Warn("Ignoring since value %q: must be a positive duration", since)
 		} else if parsed < time.Second {
 			log.Warn("Ignoring since value %q: must be at least 1s", since)
 		} else {
@@ -217,6 +219,31 @@ func resolveSince(opts *gatherOptions) (time.Duration, string) {
 		}
 	}
 	return d, sinceTime
+}
+
+func resolveNamespaces(opts *gatherOptions) []string {
+	raw := opts.namespaces
+	if raw == "" {
+		raw = os.Getenv("RHDH_TARGET_NAMESPACES")
+	}
+	return namespace.ParseNamespaces(raw)
+}
+
+func resolveHeapDumpMethod(cmd *cobra.Command, opts *gatherOptions) string {
+	if cmd.Flags().Changed("heap-dump-method") {
+		return opts.heapDumpMethod
+	}
+	if m := os.Getenv("RHDH_HEAP_DUMP_METHOD"); m != "" {
+		return m
+	}
+	return opts.heapDumpMethod
+}
+
+func resolveHeapDumpInstances(opts *gatherOptions) string {
+	if opts.heapDumpInstances != "" {
+		return opts.heapDumpInstances
+	}
+	return os.Getenv("RHDH_HEAP_DUMP_INSTANCES")
 }
 
 func getEnvDefault(key, fallback string) string {

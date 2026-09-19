@@ -104,82 +104,6 @@ func TestHeapDumpMethodValidation(t *testing.T) {
 	}
 }
 
-func TestBuildEnv_Namespaces(t *testing.T) {
-	opts := &gatherOptions{
-		namespaces:     "ns1,ns2",
-		heapDumpMethod: "inspector",
-	}
-	env := buildEnv(opts)
-
-	found := false
-	for _, e := range env {
-		if e == "RHDH_TARGET_NAMESPACES=ns1,ns2" {
-			found = true
-			break
-		}
-	}
-	if !found {
-		t.Error("RHDH_TARGET_NAMESPACES not set in env")
-	}
-}
-
-func TestBuildEnv_Secrets(t *testing.T) {
-	opts := &gatherOptions{
-		withSecrets:    true,
-		heapDumpMethod: "inspector",
-	}
-	env := buildEnv(opts)
-
-	found := false
-	for _, e := range env {
-		if e == "RHDH_WITH_SECRETS=true" {
-			found = true
-			break
-		}
-	}
-	if !found {
-		t.Error("RHDH_WITH_SECRETS=true not set in env")
-	}
-}
-
-func TestBuildEnv_HeapDumps(t *testing.T) {
-	opts := &gatherOptions{
-		withHeapDumps:     true,
-		heapDumpMethod:    "sigusr2",
-		heapDumpInstances: "my-rhdh,dev-hub",
-	}
-	env := buildEnv(opts)
-
-	checks := map[string]bool{
-		"RHDH_WITH_HEAP_DUMPS=true":              false,
-		"RHDH_HEAP_DUMP_METHOD=sigusr2":           false,
-		"RHDH_HEAP_DUMP_INSTANCES=my-rhdh,dev-hub": false,
-	}
-	for _, e := range env {
-		if _, ok := checks[e]; ok {
-			checks[e] = true
-		}
-	}
-	for k, found := range checks {
-		if !found {
-			t.Errorf("%s not found in env", k)
-		}
-	}
-}
-
-func TestBuildEnv_NoNamespacesOmitted(t *testing.T) {
-	opts := &gatherOptions{
-		heapDumpMethod: "inspector",
-	}
-	env := buildEnv(opts)
-
-	for _, e := range env {
-		if e == "RHDH_TARGET_NAMESPACES=" {
-			t.Error("RHDH_TARGET_NAMESPACES should not be set when empty")
-		}
-	}
-}
-
 func TestGetVersion_EnvOverride(t *testing.T) {
 	t.Setenv("RHDH_MUST_GATHER_VERSION", "1.2.3-test")
 	v := getVersion()
@@ -193,15 +117,6 @@ func TestGetVersion_Compiled(t *testing.T) {
 	v := getVersion()
 	if v != version {
 		t.Errorf("getVersion() = %q, want compiled-in %q", v, version)
-	}
-}
-
-func TestBoolStr(t *testing.T) {
-	if boolStr(true) != "true" {
-		t.Error("boolStr(true) != true")
-	}
-	if boolStr(false) != "false" {
-		t.Error("boolStr(false) != false")
 	}
 }
 
