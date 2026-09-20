@@ -32,7 +32,10 @@ type Helm struct{}
 
 func (h *Helm) Name() string { return "helm" }
 
-const helmTimestampLayout = "2006-01-02 15:04:05.999999999 -0700 MST"
+const (
+	helmTimestampLayout = "2006-01-02 15:04:05.999999999 -0700 MST"
+	okpContainer        = "okp"
+)
 
 var (
 	rhdhPatternRE      = regexp.MustCompile(`(?i)(backstage|rhdh|developer-hub)`)
@@ -221,12 +224,17 @@ func (h *Helm) collectReleaseData(ctx context.Context, cfg *Config, ns, name, re
 		}
 
 		for _, dep := range deployments {
-			outDir := filepath.Join(releaseDir, "dependencies", dep.Name)
+			var outDir string
 			skipAppData := true
-			if dep == primary {
+			switch {
+			case dep == primary:
 				outDir = filepath.Join(releaseDir, "deployment")
 				skipAppData = false
-			} else {
+			case deploymentHasContainer(dep, okpContainer):
+				outDir = filepath.Join(releaseDir, "okp-deployment")
+				log.Info("    --> Collecting OKP Deployment: %s", dep.Name)
+			default:
+				outDir = filepath.Join(releaseDir, "dependencies", dep.Name)
 				log.Info("    --> Collecting Helm dependency Deployment: %s", dep.Name)
 			}
 
@@ -240,13 +248,13 @@ func (h *Helm) collectReleaseData(ctx context.Context, cfg *Config, ns, name, re
 			if err := CollectWorkload(ctx, cfg, ref, outDir); err != nil {
 				log.Warn("Failed to collect workload %s/%s: %v", ns, dep.Name, err)
 			}
-			processedWorkloads[ns+"/"+dep.Name] = true
+			processedWorkloads[workloadKey(KindDeployment, ns, dep.Name)] = true
 		}
 		if stsName != "" {
 			if err := CollectDBStatefulSet(ctx, cfg, ns, stsName, releaseDir); err != nil {
 				log.Warn("Failed to collect DB statefulset: %v", err)
 			}
-			processedWorkloads[ns+"/"+stsName] = true
+			processedWorkloads[workloadKey(KindStatefulSet, ns, stsName)] = true
 		}
 	}
 
@@ -307,31 +315,59 @@ func (h *Helm) gatherStandaloneDeployments(ctx context.Context, cfg *Config, hel
 		}
 	}
 
-	type standaloneWorkload struct {
+	type standaloneInstance struct {
 		namespace string
-		name      string
+		instance  string
+		primary   string
 		kind      WorkloadKind
 	}
 
-	var workloads []standaloneWorkload
-	for _, dep := range allDeps {
-		if isRHDHHelmWorkload(dep.Labels, dep.Spec.Template.Spec) && !mustGatherRE.MatchString(dep.Name) {
-			key := dep.Namespace + "/" + dep.Name
-			if !processedWorkloads[key] && cfg.ShouldInclude(dep.Namespace) {
-				workloads = append(workloads, standaloneWorkload{dep.Namespace, dep.Name, KindDeployment})
-			}
-		}
+	type instanceKey struct {
+		namespace string
+		instance  string
 	}
-	for _, sts := range allSTS {
-		if isRHDHHelmWorkload(sts.Labels, sts.Spec.Template.Spec) && !mustGatherRE.MatchString(sts.Name) {
-			key := sts.Namespace + "/" + sts.Name
-			if !processedWorkloads[key] && cfg.ShouldInclude(sts.Namespace) {
-				workloads = append(workloads, standaloneWorkload{sts.Namespace, sts.Name, KindStatefulSet})
-			}
+	seen := make(map[instanceKey]bool)
+	var instances []standaloneInstance
+
+	for _, dep := range allDeps {
+		if !isRHDHHelmWorkload(dep.Labels, dep.Spec.Template.Spec) || mustGatherRE.MatchString(dep.Name) || deploymentHasContainer(&dep, okpContainer) {
+			continue
 		}
+		if processedWorkloads[workloadKey(KindDeployment, dep.Namespace, dep.Name)] || !cfg.ShouldInclude(dep.Namespace) {
+			continue
+		}
+		inst := dep.Labels["app.kubernetes.io/instance"]
+		if inst == "" {
+			inst = dep.Name
+		}
+		ik := instanceKey{dep.Namespace, inst}
+		if seen[ik] {
+			continue
+		}
+		seen[ik] = true
+		instances = append(instances, standaloneInstance{dep.Namespace, inst, dep.Name, KindDeployment})
 	}
 
-	if len(workloads) == 0 {
+	for _, sts := range allSTS {
+		if !isRHDHHelmWorkload(sts.Labels, sts.Spec.Template.Spec) || mustGatherRE.MatchString(sts.Name) {
+			continue
+		}
+		if processedWorkloads[workloadKey(KindStatefulSet, sts.Namespace, sts.Name)] || !cfg.ShouldInclude(sts.Namespace) {
+			continue
+		}
+		inst := sts.Labels["app.kubernetes.io/instance"]
+		if inst == "" {
+			inst = sts.Name
+		}
+		ik := instanceKey{sts.Namespace, inst}
+		if seen[ik] {
+			continue
+		}
+		seen[ik] = true
+		instances = append(instances, standaloneInstance{sts.Namespace, inst, sts.Name, KindStatefulSet})
+	}
+
+	if len(instances) == 0 {
 		log.Debug("No additional RHDH workloads found via standalone deployment detection")
 		return 0
 	}
@@ -339,65 +375,51 @@ func (h *Helm) gatherStandaloneDeployments(ctx context.Context, cfg *Config, hel
 	log.Info("Found potential standalone RHDH deployments, filtering out already-processed ones...")
 	count := 0
 
-	for _, wl := range workloads {
-		log.Info("--> Processing standalone Helm deployment: %s in namespace %s", wl.name, wl.namespace)
+	for _, si := range instances {
+		if processedWorkloads[workloadKey(si.kind, si.namespace, si.primary)] {
+			continue
+		}
+		log.Info("--> Processing standalone Helm instance: %s in namespace %s (primary: %s)", si.instance, si.namespace, si.primary)
 		count++
 
-		wlDir := filepath.Join(standaloneDir, "ns="+wl.namespace, wl.name)
+		wlDir := filepath.Join(standaloneDir, "ns="+si.namespace, si.instance)
 		_ = os.MkdirAll(wlDir, 0o755)
 
-		if !processedNS[wl.namespace] {
-			nsDir := filepath.Join(standaloneDir, "ns="+wl.namespace)
+		if !processedNS[si.namespace] {
+			nsDir := filepath.Join(standaloneDir, "ns="+si.namespace)
 			_ = os.MkdirAll(nsDir, 0o755)
-			CollectNamespaceData(ctx, cfg, wl.namespace, nsDir, cfg.WithSecrets)
-			processedNS[wl.namespace] = true
+			CollectNamespaceData(ctx, cfg, si.namespace, nsDir, cfg.WithSecrets)
+			processedNS[si.namespace] = true
 		}
 
-		h.writeStandaloneNote(filepath.Join(wlDir, "standalone-note.txt"), wl.namespace, wl.name)
-		h.writeHelmMetadata(ctx, cfg, wl.namespace, wl.name, wl.kind, filepath.Join(wlDir, "helm-metadata.txt"))
+		h.writeStandaloneNote(filepath.Join(wlDir, "standalone-note.txt"), si.namespace, si.instance)
+		h.writeHelmMetadata(ctx, cfg, si.namespace, si.primary, si.kind, filepath.Join(wlDir, "helm-metadata.txt"))
 
-		// Write top-level workload YAML and describe (bash version does this separately)
-		switch wl.kind {
-		case KindDeployment:
-			dep, err := client.AppsV1().Deployments(wl.namespace).Get(ctx, wl.name, metav1.GetOptions{})
-			if err == nil {
-				writeResource(filepath.Join(wlDir, "deployment.yaml"), dep)
-				describeResource(ctx, cfg, filepath.Join(wlDir, "deployment.describe.txt"), "deployment", wl.namespace, wl.name)
-			}
-		case KindStatefulSet:
-			sts, err := client.AppsV1().StatefulSets(wl.namespace).Get(ctx, wl.name, metav1.GetOptions{})
-			if err == nil {
-				writeResource(filepath.Join(wlDir, "statefulset.yaml"), sts)
-				describeResource(ctx, cfg, filepath.Join(wlDir, "statefulset.describe.txt"), "statefulset", wl.namespace, wl.name)
-			}
-		}
-
-		ref := WorkloadRef{Namespace: wl.namespace, Name: wl.name, Kind: wl.kind, InstanceName: wl.name}
+		ref := WorkloadRef{Namespace: si.namespace, Name: si.primary, Kind: si.kind, InstanceName: si.instance}
 		subDir := "deployment"
-		if wl.kind == KindStatefulSet {
+		if si.kind == KindStatefulSet {
 			subDir = "statefulset"
 		}
 		if err := CollectWorkload(ctx, cfg, ref, filepath.Join(wlDir, subDir)); err != nil {
-			log.Warn("Failed to collect workload %s/%s: %v", wl.namespace, wl.name, err)
+			log.Warn("Failed to collect workload %s/%s: %v", si.namespace, si.primary, err)
 		}
 
-		h.collectDependentServices(ctx, cfg, wl.namespace, wl.name, wl.kind, wlDir, processedWorkloads)
-		processedWorkloads[wl.namespace+"/"+wl.name] = true
+		h.collectDependentServices(ctx, cfg, si.namespace, si.primary, si.kind, wlDir, processedWorkloads)
+		processedWorkloads[workloadKey(si.kind, si.namespace, si.primary)] = true
 	}
 
 	if count > 0 {
 		log.Info("Standalone Helm deployments were found and collected in: %s", standaloneDir)
 
-		// Append standalone markers to releases file
 		releasesFile := filepath.Join(helmDir, "all-rhdh-releases.txt")
 		f, err := os.OpenFile(releasesFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 		if err == nil {
 			var sb strings.Builder
 			sb.WriteString("\n# Standalone Helm Deployments (detected via labels/images)\n")
 			sb.WriteString("# =========================================================\n")
-			for _, wl := range workloads {
-				if processedWorkloads[wl.namespace+"/"+wl.name] {
-					fmt.Fprintf(&sb, "%s/%s (standalone)\n", wl.namespace, wl.name)
+			for _, si := range instances {
+				if processedWorkloads[workloadKey(si.kind, si.namespace, si.primary)] {
+					fmt.Fprintf(&sb, "%s/%s (standalone)\n", si.namespace, si.instance)
 				}
 			}
 			_, _ = f.WriteString(sb.String())
@@ -435,24 +457,37 @@ func (h *Helm) collectDependentServices(ctx context.Context, cfg *Config, ns, ma
 	deps, _ := client.AppsV1().Deployments(ns).List(ctx, metav1.ListOptions{LabelSelector: selector})
 	if deps != nil {
 		for _, dep := range deps.Items {
-			if dep.Name == mainName || processedWorkloads[ns+"/"+dep.Name] {
+			if dep.Name == mainName || processedWorkloads[workloadKey(KindDeployment, ns, dep.Name)] {
 				continue
 			}
-			log.Info("    --> Collecting dependent service: %s (Deployment)", dep.Name)
-			depDir := filepath.Join(wlDir, "dependencies", dep.Name)
-			_ = os.MkdirAll(depDir, 0o755)
-
-			writeResource(filepath.Join(depDir, "deployment.yaml"), &dep)
-			describeResource(ctx, cfg, filepath.Join(depDir, "deployment.describe.txt"), "deployment", ns, dep.Name)
-			h.collectDependentLogs(ctx, cfg, ns, dep.Name, instanceLabel, &dep.Spec.Selector.MatchLabels, depDir)
-			processedWorkloads[ns+"/"+dep.Name] = true
+			if deploymentHasContainer(&dep, okpContainer) {
+				log.Info("    --> Collecting OKP Deployment: %s", dep.Name)
+				ref := WorkloadRef{
+					Namespace:    ns,
+					Name:         dep.Name,
+					Kind:         KindDeployment,
+					InstanceName: instanceLabel,
+					SkipAppData:  true,
+				}
+				if err := CollectWorkload(ctx, cfg, ref, filepath.Join(wlDir, "okp-deployment")); err != nil {
+					log.Warn("Failed to collect OKP workload %s/%s: %v", ns, dep.Name, err)
+				}
+			} else {
+				log.Info("    --> Collecting dependent service: %s (Deployment)", dep.Name)
+				depDir := filepath.Join(wlDir, "dependencies", dep.Name)
+				_ = os.MkdirAll(depDir, 0o755)
+				writeResource(filepath.Join(depDir, "deployment.yaml"), &dep)
+				describeResource(ctx, cfg, filepath.Join(depDir, "deployment.describe.txt"), "deployment", ns, dep.Name)
+				h.collectDependentLogs(ctx, cfg, ns, dep.Name, instanceLabel, &dep.Spec.Selector.MatchLabels, depDir)
+			}
+			processedWorkloads[workloadKey(KindDeployment, ns, dep.Name)] = true
 		}
 	}
 
 	stsList, _ := client.AppsV1().StatefulSets(ns).List(ctx, metav1.ListOptions{LabelSelector: selector})
 	if stsList != nil {
 		for _, sts := range stsList.Items {
-			if sts.Name == mainName || processedWorkloads[ns+"/"+sts.Name] {
+			if sts.Name == mainName || processedWorkloads[workloadKey(KindStatefulSet, ns, sts.Name)] {
 				continue
 			}
 			log.Info("    --> Collecting dependent service: %s (StatefulSet)", sts.Name)
@@ -462,7 +497,7 @@ func (h *Helm) collectDependentServices(ctx context.Context, cfg *Config, ns, ma
 			writeResource(filepath.Join(depDir, "statefulset.yaml"), &sts)
 			describeResource(ctx, cfg, filepath.Join(depDir, "statefulset.describe.txt"), "statefulset", ns, sts.Name)
 			h.collectDependentLogs(ctx, cfg, ns, sts.Name, instanceLabel, &sts.Spec.Selector.MatchLabels, depDir)
-			processedWorkloads[ns+"/"+sts.Name] = true
+			processedWorkloads[workloadKey(KindStatefulSet, ns, sts.Name)] = true
 		}
 	}
 }
@@ -598,6 +633,10 @@ func extractWorkloadNames(manifest string) (deployNames []string, stsName string
 		}
 	}
 	return
+}
+
+func workloadKey(kind WorkloadKind, ns, name string) string {
+	return string(kind) + "/" + ns + "/" + name
 }
 
 func deploymentHasContainer(dep *appsv1.Deployment, name string) bool {
