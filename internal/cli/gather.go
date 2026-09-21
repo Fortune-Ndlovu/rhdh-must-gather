@@ -166,12 +166,21 @@ func collectPodLogs(ctx context.Context, client *kube.Client, basePath string) {
 	}
 	defer func() { _ = stream.Close() }()
 
-	data, err := io.ReadAll(stream)
+	destPath := filepath.Join(basePath, "must-gather.log")
+	tmpPath := destPath + ".tmp"
+	f, err := os.Create(tmpPath)
 	if err != nil {
-		log.Warn("Failed to read must-gather pod logs: %v", err)
+		log.Warn("Failed to create must-gather log file: %v", err)
 		return
 	}
-	_ = os.WriteFile(filepath.Join(basePath, "must-gather.log"), data, 0o644)
+	_, copyErr := io.Copy(f, stream)
+	closeErr := f.Close()
+	if copyErr != nil || closeErr != nil {
+		_ = os.Remove(tmpPath)
+		log.Warn("Failed to write must-gather pod logs: copy=%v close=%v", copyErr, closeErr)
+		return
+	}
+	_ = os.Rename(tmpPath, destPath)
 }
 
 // resolveSince returns the since duration and sinceTime string. CLI flags

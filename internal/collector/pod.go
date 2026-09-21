@@ -214,6 +214,50 @@ func execInPod(ctx context.Context, config *rest.Config, client kubernetes.Inter
 	return stdout.String(), nil
 }
 
+// execInPodToFile streams the stdout of a command executed in a pod directly
+// to a local file, avoiding buffering the entire output in memory.
+func execInPodToFile(ctx context.Context, config *rest.Config, client kubernetes.Interface, ns, podName, container, script, destPath string) error {
+	req := client.CoreV1().RESTClient().Post().
+		Resource("pods").
+		Name(podName).
+		Namespace(ns).
+		SubResource("exec").
+		VersionedParams(&corev1.PodExecOptions{
+			Container: container,
+			Command:   []string{"sh", "-c", script},
+			Stdout:    true,
+			Stderr:    true,
+		}, scheme.ParameterCodec)
+
+	exec, err := remotecommand.NewSPDYExecutor(config, "POST", req.URL())
+	if err != nil {
+		return fmt.Errorf("creating executor: %w", err)
+	}
+
+	f, err := os.Create(destPath)
+	if err != nil {
+		return fmt.Errorf("creating output file: %w", err)
+	}
+
+	var stderr bytes.Buffer
+	streamErr := exec.StreamWithContext(ctx, remotecommand.StreamOptions{
+		Stdout: f,
+		Stderr: &stderr,
+	})
+	closeErr := f.Close()
+
+	if streamErr != nil {
+		_ = os.Remove(destPath)
+		return fmt.Errorf("exec failed: %w (stderr: %s)", streamErr, stderr.String())
+	}
+	if closeErr != nil {
+		_ = os.Remove(destPath)
+		return fmt.Errorf("closing output file: %w", closeErr)
+	}
+
+	return nil
+}
+
 func parseSections(output string) map[string]string {
 	sections := map[string]string{}
 	var currentKey string
