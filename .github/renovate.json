@@ -4,25 +4,22 @@
   "baseBranchPatterns": ["main", "/^release-.*/"],
   "packageRules": [
     {
-      "description": "Disable all updates on release branches by default",
+      "description": "Disable major updates on release branches",
       "matchBaseBranches": ["/^release-.*/"],
+      "matchUpdateTypes": ["major"],
       "enabled": false
-    },
-    {
-      "description": "Re-enable only patch updates on release branches",
-      "matchBaseBranches": ["/^release-.*/"],
-      "matchUpdateTypes": ["patch"],
-      "enabled": true
-    },
-    {
-      "description": "Re-enable digest updates for container images on release branches",
-      "matchBaseBranches": ["/^release-.*/"],
-      "matchManagers": ["dockerfile"],
-      "matchUpdateTypes": ["digest"],
-      "enabled": true
     }
   ],
   "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^Makefile$/"],
+      "matchStrings": [
+        "# renovate: datasource=docker depName=(?<depName>\\S+)\\nHERMETO_IMAGE \\?= \\S+:(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    },
     {
       "customType": "regex",
       "managerFilePatterns": ["/^\\.github/workflows/.*\\.ya?ml$/"],

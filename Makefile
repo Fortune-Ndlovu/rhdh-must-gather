@@ -15,6 +15,8 @@ HELM_SET ?= ## Additional Helm --set flags for deploy-k8s (e.g., "gather.logLeve
 OUTPUT_FILE ?= ## Output file for deploy-k8s (default: rhdh-must-gather-output.k8s.<timestamp>.tar.gz)
 HELM_TIMEOUT ?= ## Timeout for Helm install/upgrade in deploy-k8s (default: 60m)
 CONTAINER_TOOL ?= podman
+# renovate: datasource=docker depName=quay.io/konflux-ci/hermeto
+HERMETO_IMAGE ?= quay.io/konflux-ci/hermeto:0.62.0
 BUILD_ARGS ?=
 LABELS ?=
 BASE_COLLECTION_PATH ?= ./out
@@ -27,7 +29,7 @@ MUST_GATHER_CLEAN_VERSION := $(shell $(GO) list -m -f '{{.Version}}' github.com/
 GO_LDFLAGS := -X '$(GO_MODULE)/internal/cli.version=$(RHDH_MUST_GATHER_VERSION)' -X 'github.com/openshift/must-gather-clean/pkg/version.versionFromGit=$(MUST_GATHER_CLEAN_VERSION)'
 
 
-default: run-local
+default: build
 
 ##@ Development
 
@@ -72,9 +74,13 @@ endif
 
 ##@ Go
 
+.PHONY: build
+build: ## Build the Go gather binary
+	$(GO) build $(GO_BUILD_FLAGS) -ldflags "$(GO_LDFLAGS)" -o gather ./cmd/gather
+
 .PHONY: test
 test: ## Run unit tests
-	$(GO) test -mod=mod ./... -v -count=1
+	$(GO) test -mod=mod ./... -v -count=1 -coverprofile=cover.out
 
 .PHONY: lint
 lint: ## Run linter (golangci-lint)
@@ -87,6 +93,10 @@ image-build: ## Build the must-gather container image
 	@echo "Building must-gather image..."
 	$(CONTAINER_TOOL) build $(BUILD_ARGS) $(if $(LABELS),$(LABELS)) --build-arg RHDH_MUST_GATHER_VERSION=$(RHDH_MUST_GATHER_VERSION) -t $(IMAGE_NAME):$(IMAGE_TAG) .
 	@echo "Image built: $(IMAGE_NAME):$(IMAGE_TAG)"
+
+.PHONY: hermetic-build
+hermetic-build: ## Build must-gather image hermetically using Hermeto (matches Konflux/CI)
+	HERMETO_IMAGE="$(HERMETO_IMAGE)" scripts/local-hermeto-build.sh -d . -i $(FULL_IMAGE_NAME) --version "$(RHDH_MUST_GATHER_VERSION)"
 
 .PHONY: image-push
 image-push: image-build ## Build and push the image to registry
@@ -129,8 +139,9 @@ clean-out: ## Remove the local output directory
 	@echo "Local output directory cleaned"
 
 .PHONY: clean
-clean: clean-out ## Remove built images and test output
+clean: clean-out ## Remove built images, binary, and test output
 	@echo "Cleaning up..."
+	-rm -f gather
 	-podman rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
 	-podman rmi $(FULL_IMAGE_NAME) 2>/dev/null || true
 	-rm -rf "$(TEST_RESULTS_DIR)"
