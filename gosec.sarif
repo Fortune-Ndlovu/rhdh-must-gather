@@ -1,0 +1,5532 @@
+{
+	"runs": [
+		{
+			"results": [
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 15,
+									"endLine": 199,
+									"snippet": {
+										"text": "_ = os.Rename(tmpPath, destPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 15,
+									"startLine": 199
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Path traversal via taint analysis"
+					},
+					"ruleId": "G703"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 16,
+									"endLine": 195,
+									"snippet": {
+										"text": "_ = os.Remove(tmpPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 16,
+									"startLine": 195
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Path traversal via taint analysis"
+					},
+					"ruleId": "G703"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 21,
+									"endLine": 187,
+									"snippet": {
+										"text": "f, err := os.Create(tmpPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 21,
+									"startLine": 187
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Path traversal via taint analysis"
+					},
+					"ruleId": "G703"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 23,
+									"endLine": 88,
+									"snippet": {
+										"text": "if err = os.WriteFile(versionFile, []byte(\"rhdh-must-gather\\n\"+ver+\"\\n\"), 0o644); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 23,
+									"startLine": 88
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Path traversal via taint analysis"
+					},
+					"ruleId": "G703"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 22,
+									"endLine": 39,
+									"snippet": {
+										"text": "if err = os.MkdirAll(basePath, 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 22,
+									"startLine": 39
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Path traversal via taint analysis"
+					},
+					"ruleId": "G703"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/obfuscate/obfuscate.go"
+								},
+								"region": {
+									"endColumn": 21,
+									"endLine": 471,
+									"snippet": {
+										"text": "return os.Symlink(link, target)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 21,
+									"startLine": 471
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal"
+					},
+					"ruleId": "G122"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 17,
+									"endLine": 283,
+									"snippet": {
+										"text": "_ = os.Remove(path)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 17,
+									"startLine": 283
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal"
+					},
+					"ruleId": "G122"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 20,
+									"endLine": 279,
+									"snippet": {
+										"text": "_ = os.RemoveAll(path)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 20,
+									"startLine": 279
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal"
+					},
+					"ruleId": "G122"
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/obfuscate.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 52,
+									"snippet": {
+										"text": "cmd := exec.Command(exe, obfuscateCommandArgs(configPath, inputPath, outputPath, reportDir, runtime.GOMAXPROCS(0))...)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 52
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Subprocess launched with variable"
+					},
+					"ruleId": "G204",
+					"ruleIndex": 1
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/sanitize/sanitize.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 120,
+									"snippet": {
+										"text": "f, err := os.Open(path)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 120
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/sanitize/sanitize.go"
+								},
+								"region": {
+									"endColumn": 15,
+									"endLine": 72,
+									"snippet": {
+										"text": "data, err := os.ReadFile(path)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 15,
+									"startLine": 72
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/obfuscate/obfuscate.go"
+								},
+								"region": {
+									"endColumn": 14,
+									"endLine": 491,
+									"snippet": {
+										"text": "out, err := os.OpenFile(dst, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, info.Mode().Perm())"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 14,
+									"startLine": 491
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/obfuscate/obfuscate.go"
+								},
+								"region": {
+									"endColumn": 13,
+									"endLine": 478,
+									"snippet": {
+										"text": "in, err := os.Open(src)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 13,
+									"startLine": 478
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 237,
+									"snippet": {
+										"text": "f, err := os.Create(destPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 237
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 177,
+									"snippet": {
+										"text": "f, err := os.Create(outPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 177
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 659,
+									"snippet": {
+										"text": "f, err := os.Create(path)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 659
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 252,
+									"snippet": {
+										"text": "f, err := os.Create(logPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 252
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 165,
+									"snippet": {
+										"text": "f, err := os.Open(nsFile)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 165
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 13,
+									"endLine": 412,
+									"snippet": {
+										"text": "f, err := os.OpenFile(releasesFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 13,
+									"startLine": 412
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 771,
+									"snippet": {
+										"text": "f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 771
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 469,
+									"snippet": {
+										"text": "f, err := os.Create(outPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 469
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"fixes": [
+						{
+							"artifactChanges": [
+								{
+									"artifactLocation": {
+										"description": {
+											"text": "File requiring changes"
+										}
+									},
+									"replacements": [
+										{
+											"deletedRegion": {
+												"endColumn": 1,
+												"endLine": 1,
+												"startColumn": 1,
+												"startLine": 1
+											}
+										}
+									]
+								}
+							],
+							"description": {
+								"markdown": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal.",
+								"text": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+							}
+						}
+					],
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 187,
+									"snippet": {
+										"text": "f, err := os.Create(tmpPath)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 187
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Potential file inclusion via variable"
+					},
+					"ruleId": "G304",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 13,
+									"endLine": 412,
+									"snippet": {
+										"text": "f, err := os.OpenFile(releasesFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 13,
+									"startLine": 412
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect file permissions to be 0600 or less"
+					},
+					"ruleId": "G302",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 771,
+									"snippet": {
+										"text": "f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 771
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect file permissions to be 0600 or less"
+					},
+					"ruleId": "G302",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/obfuscate/obfuscate.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 488,
+									"snippet": {
+										"text": "if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 488
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/exec/exec.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 41,
+									"snippet": {
+										"text": "if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 41
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 314,
+									"snippet": {
+										"text": "_ = os.MkdirAll(secDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 314
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 302,
+									"snippet": {
+										"text": "_ = os.MkdirAll(cmDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 302
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 298,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 298
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 209,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 209
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 195,
+									"snippet": {
+										"text": "_ = os.MkdirAll(rsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 195
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 187,
+									"snippet": {
+										"text": "_ = os.MkdirAll(histDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 187
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 170,
+									"snippet": {
+										"text": "_ = os.MkdirAll(podsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 170
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 148,
+									"snippet": {
+										"text": "_ = os.MkdirAll(stsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 148
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 80,
+									"snippet": {
+										"text": "_ = os.MkdirAll(podsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 80
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 38,
+									"snippet": {
+										"text": "if err := os.MkdirAll(outDir, 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 38
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 379,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(outPath), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 379
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 346,
+									"snippet": {
+										"text": "_ = os.MkdirAll(pluginsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 346
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 152,
+									"snippet": {
+										"text": "_ = os.MkdirAll(cDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 152
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 144,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 144
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 93,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 93
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 28,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 28
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/platform.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 32,
+									"snippet": {
+										"text": "if err := os.MkdirAll(outDir, 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 32
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 253,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 253
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 67,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 67
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 30,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 30
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 488,
+									"snippet": {
+										"text": "_ = os.MkdirAll(eventingDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 488
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 475,
+									"snippet": {
+										"text": "_ = os.MkdirAll(servingDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 475
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 439,
+									"snippet": {
+										"text": "_ = os.MkdirAll(knativeDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 439
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 411,
+									"snippet": {
+										"text": "_ = os.MkdirAll(wfDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 411
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 400,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 400
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 359,
+									"snippet": {
+										"text": "_ = os.MkdirAll(sfwDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 359
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 300,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 300
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 260,
+									"snippet": {
+										"text": "_ = os.MkdirAll(sfpDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 260
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 228,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crdsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 228
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 141,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 141
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 118,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 118
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 105,
+									"snippet": {
+										"text": "_ = os.MkdirAll(serverlessDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 105
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 54,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 54
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 658,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 658
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 629,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 629
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 538,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 538
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 376,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 376
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 367,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 367
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 330,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 330
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 277,
+									"snippet": {
+										"text": "_ = os.MkdirAll(depsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 277
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 246,
+									"snippet": {
+										"text": "_ = os.MkdirAll(configsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 246
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 192,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 192
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 114,
+									"snippet": {
+										"text": "_ = os.MkdirAll(crdsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 114
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 71,
+									"snippet": {
+										"text": "_ = os.MkdirAll(olmDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 71
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 52,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 52
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 35,
+									"snippet": {
+										"text": "_ = os.MkdirAll(outDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 35
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 874,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 874
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 833,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 833
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 757,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 757
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 713,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 713
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 696,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 696
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 492,
+									"snippet": {
+										"text": "_ = os.MkdirAll(depDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 492
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 475,
+									"snippet": {
+										"text": "_ = os.MkdirAll(depDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 475
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 387,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 387
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 383,
+									"snippet": {
+										"text": "_ = os.MkdirAll(wlDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 383
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 133,
+									"snippet": {
+										"text": "_ = os.MkdirAll(releaseDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 133
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 121,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 121
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 46,
+									"snippet": {
+										"text": "_ = os.MkdirAll(helmDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 46
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 152,
+									"snippet": {
+										"text": "_ = os.MkdirAll(containerDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 152
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 133,
+									"snippet": {
+										"text": "_ = os.MkdirAll(podDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 133
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 40,
+									"snippet": {
+										"text": "_ = os.MkdirAll(heapDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 40
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/clusterinfo.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 93,
+									"snippet": {
+										"text": "_ = os.MkdirAll(filepath.Dir(path), 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 93
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/clusterinfo.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 46,
+									"snippet": {
+										"text": "_ = os.MkdirAll(nsDir, 0o755)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 46
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/clusterinfo.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 21,
+									"snippet": {
+										"text": "if err := os.MkdirAll(outDir, 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 21
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 11,
+									"endLine": 39,
+									"snippet": {
+										"text": "if err = os.MkdirAll(basePath, 0o755); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 11,
+									"startLine": 39
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect directory permissions to be 0750 or less"
+					},
+					"ruleId": "G301",
+					"ruleIndex": 2
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/sanitize/sanitize.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 252,
+									"snippet": {
+										"text": "_ = os.WriteFile(report, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 252
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/sanitize/sanitize.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 109,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(content), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 109
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/exec/exec.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 61,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(content), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 61
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/exec/exec.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 55,
+									"snippet": {
+										"text": "return os.WriteFile(path, data, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 55
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 285,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 285
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 261,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 261
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 86,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(podsDir, \"pods.describe.txt\"), []byte(msg), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 86
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 85,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(podsDir, \"pods.txt\"), []byte(msg), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 85
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/workload.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 84,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(podsDir, \"pods.yaml\"), []byte(msg), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 84
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/route.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 60,
+									"snippet": {
+										"text": "return os.WriteFile(outPath, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 60
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/route.go"
+								},
+								"region": {
+									"endColumn": 10,
+									"endLine": 39,
+									"snippet": {
+										"text": "return os.WriteFile(outPath, []byte(\"Route API not available (not an OpenShift cluster)\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 10,
+									"startLine": 39
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 380,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, []byte(content), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 380
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 340,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, []byte(out), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 340
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 332,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, append(jsonData, '\\n'), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 332
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 314,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, []byte(out), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 314
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 305,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, append(jsonData, '\\n'), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 305
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 172,
+									"snippet": {
+										"text": "_ = os.WriteFile(outPath, []byte(fmt.Sprintf(\"Failed to get logs: %v\\n\", err)), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 172
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 137,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"container=\"+c.Name+\".txt\"), []byte(out), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 137
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 134,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"container=\"+c.Name+\".txt\"),\n[]byte(fmt.Sprintf(\"Failed to collect processes: %v\\n\", err)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 133
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 85,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"app-config.dynamic-plugins.yaml\"), []byte(pluginSections[\"CONFIG\"]+\"\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 85
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 84,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"dynamic-plugins-root.fs.txt\"), []byte(pluginSections[\"LS\"]+\"\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 84
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 61,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"node-version.txt\"), []byte(strings.TrimSpace(sections[\"NODE_VERSION\"])+\"\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 61
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 59,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"env-vars.txt\"), []byte(envVars), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 59
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 56,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"app-container-userid.txt\"), []byte(sections[\"ID\"]+\"\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 56
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/pod.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 50,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"collection-error.txt\"),\n[]byte(fmt.Sprintf(\"Failed to exec into pod: %v\\n\", err)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 49
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/platform.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 60,
+									"snippet": {
+										"text": "if err := os.WriteFile(filepath.Join(outDir, \"platform.txt\"), []byte(txt.String()), 0o644); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 60
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/platform.go"
+								},
+								"region": {
+									"endColumn": 12,
+									"endLine": 45,
+									"snippet": {
+										"text": "if err := os.WriteFile(filepath.Join(outDir, \"platform.json\"), append(jsonData, '\\n'), 0o644); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 12,
+									"startLine": 45
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 254,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(content), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 254
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 140,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, data, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 140
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 137,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(fmt.Sprintf(\"describe %s %s: marshal failed: %v\\n\", resourceType, name, err)), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 137
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 131,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(fmt.Sprintf(\"describe %s %s failed: %v\\n\", resourceType, name, err)), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 131
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 120,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(fmt.Sprintf(\"describe %s failed: %v\\n\", resourceType, err)), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 120
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 114,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(fmt.Sprintf(\"describe %s: name required for CRD resources\\n\", resourceType)), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 114
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 94,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 94
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 84,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(content), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 84
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 77,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(out), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 77
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/output.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 31,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, data, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 31
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 686,
+									"snippet": {
+										"text": "_ = os.WriteFile(summaryFile, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 686
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 554,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(nsDir, \"services.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 554
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 428,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(wfDir, \"logs-previous.txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 428
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 427,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(wfDir, \"logs.txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 427
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 381,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(sfwDir, \"no-workflows.txt\"),\n[]byte(\"No SonataFlow workflows found\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 380
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 365,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(sfwDir, \"no-workflows.txt\"),\n[]byte(\"SonataFlow API not available\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 364
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 349,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crDir, \"logs-previous.txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 349
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 348,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crDir, \"logs.txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 348
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 337,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crDir, \"related-services.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 337
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 282,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(sfpDir, \"no-platforms.txt\"),\n[]byte(\"No SonataFlowPlatform CRs found\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 281
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 266,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(sfpDir, \"no-platforms.txt\"),\n[]byte(\"SonataFlow API not available\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 265
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 251,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crdsDir, \"found-crds.txt\"),\n[]byte(strings.Join(foundCRDs, \"\\n\")+\"\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 250
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 248,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crdsDir, \"no-crds.txt\"),\n[]byte(\"No Orchestrator-related CRDs found\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 247
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 220,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(nsDir, ls.prefix+\"-previous.txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 220
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 219,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(nsDir, ls.prefix+\".txt\"), []byte(\"\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 219
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 152,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(serverlessDir, \"serverless-logic-not-installed.txt\"),\n[]byte(fmt.Sprintf(\"OpenShift Serverless Logic namespace (%s) not found\\n\", logicNS)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 151
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 130,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(serverlessDir, \"serverless-not-installed.txt\"),\n[]byte(fmt.Sprintf(\"OpenShift Serverless namespace (%s) not found\\n\", serverlessNS)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 129
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/orchestrator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 88,
+									"snippet": {
+										"text": "_ = os.WriteFile(namespacesFile, []byte(strings.Join(nsList, \"\\n\")+\"\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 88
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 654,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 654
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 553,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 553
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 496,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crDir, \"warning-dual-workload.txt\"), []byte(warning), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 496
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 354,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crsDir, \"no-crs.txt\"), []byte(\"No Backstage CR found\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 354
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 336,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crsDir, \"no-crs.txt\"),\n[]byte(\"Backstage CRD not available\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 335
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 266,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(configsDir, name+\"--not-found.txt\"),\n[]byte(fmt.Sprintf(\"CM %s not found\\n\", name)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 265
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 258,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(configsDir, \"all-configmaps.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 258
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 240,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(nsDir, \"all-resources.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 240
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 132,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crdsDir, name+\"--not-found.txt\"),\n[]byte(fmt.Sprintf(\"CRD %s not found\\n\", name)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 131
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 124,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(crdsDir, \"all-crds.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 124
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/operator.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 93,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(olmDir, r.path), []byte(msg), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 93
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 324,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"inspection-summary.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 324
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/namespace_inspect.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 41,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(outDir, \"no-namespaces.txt\"),\n[]byte(\"No namespaces detected\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 40
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/ingress.go"
+								},
+								"region": {
+									"endColumn": 9,
+									"endLine": 65,
+									"snippet": {
+										"text": "return os.WriteFile(outPath, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 9,
+									"startLine": 65
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 875,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 875
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 855,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(\"Could not extract metadata\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 855
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 834,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 834
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 758,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 758
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 734,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, data, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 734
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 709,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 709
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 8,
+									"endLine": 278,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(releaseDir, \"status.txt\"),\n[]byte(formatReleaseStatus(statusAcc, statusRel)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 8,
+									"startLine": 277
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 202,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(releaseDir, \"notes.txt\"), []byte(notes), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 202
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 199,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(releaseDir, \"hooks.yaml\"), []byte(hooksContent), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 199
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 184,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(releaseDir, \"manifest.yaml\"), []byte(manifest), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 184
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 74,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(helmDir, \"all-rhdh-releases.txt\"),\n[]byte(fmt.Sprintf(\"Failed to initialize Helm: %v\\n\", err)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 73
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/helm.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 62,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(helmDir, \"no-releases.txt\"),\n[]byte(\"No RHDH-related Helm releases found (native or standalone)\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 61
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 766,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(containerDir, \"collection-failed.txt\"), []byte(sb.String()), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 766
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 243,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(containerDir, \"process-info.txt\"), []byte(out), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 243
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 166,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(containerDir, \"no-node-process.txt\"),\n[]byte(\"No Node.js process found in backstage-backend container\\nSearched /proc filesystem for node process\\nThis usually means the container is not running a Node.js application\\n\"), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 165
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 160,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(containerDir, \"no-node-process.txt\"),\n[]byte(fmt.Sprintf(\"Failed to exec into container to find Node.js process\\n\\n=== Error Details ===\\n%v\\n\", err)), 0o644)\n"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 159
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/heapdump.go"
+								},
+								"region": {
+									"endColumn": 7,
+									"endLine": 48,
+									"snippet": {
+										"text": "_ = os.WriteFile(filepath.Join(heapDir, \"no-pods.txt\"), []byte(\"No running pods found\\n\"), 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 7,
+									"startLine": 48
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/collector/clusterinfo.go"
+								},
+								"region": {
+									"endColumn": 6,
+									"endLine": 94,
+									"snippet": {
+										"text": "_ = os.WriteFile(path, data, 0o644)"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 6,
+									"startLine": 94
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				},
+				{
+					"level": "error",
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "internal/cli/gather.go"
+								},
+								"region": {
+									"endColumn": 11,
+									"endLine": 88,
+									"snippet": {
+										"text": "if err = os.WriteFile(versionFile, []byte(\"rhdh-must-gather\\n\"+ver+\"\\n\"), 0o644); err != nil {"
+									},
+									"sourceLanguage": "go",
+									"startColumn": 11,
+									"startLine": 88
+								}
+							}
+						}
+					],
+					"message": {
+						"text": "Expect WriteFile permissions to be 0600 or less"
+					},
+					"ruleId": "G306",
+					"ruleIndex": 5
+				}
+			],
+			"taxonomies": [
+				{
+					"downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.4.xml.zip",
+					"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+					"informationUri": "https://cwe.mitre.org/data/published/cwe_v4.4.pdf/",
+					"isComprehensive": true,
+					"language": "en",
+					"minimumRequiredLocalizedDataSemanticVersion": "4.4",
+					"name": "CWE",
+					"organization": "MITRE",
+					"releaseDateUtc": "2021-03-15",
+					"shortDescription": {
+						"text": "The MITRE Common Weakness Enumeration"
+					},
+					"taxa": [
+						{
+							"fullDescription": {
+								"text": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory."
+							},
+							"guid": "3e718404-88bc-3f17-883e-e85e74078a76",
+							"helpUri": "https://cwe.mitre.org/data/definitions/22.html",
+							"id": "22",
+							"shortDescription": {
+								"text": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+							}
+						},
+						{
+							"fullDescription": {
+								"text": "During installation, installed file permissions are set to allow anyone to modify those files."
+							},
+							"guid": "fca8970d-b44c-3162-a385-cc09266d12a4",
+							"helpUri": "https://cwe.mitre.org/data/definitions/276.html",
+							"id": "276",
+							"shortDescription": {
+								"text": "Incorrect Default Permissions"
+							}
+						},
+						{
+							"fullDescription": {
+								"text": "The software checks the state of a resource before using that resource, but the resource's state can change between the check and the use in a way that invalidates the results of the check."
+							},
+							"guid": "2cfefdd6-0467-39aa-9989-3c59fde595cd",
+							"helpUri": "https://cwe.mitre.org/data/definitions/367.html",
+							"id": "367",
+							"shortDescription": {
+								"text": "Time-of-check Time-of-use (TOCTOU) Race Condition"
+							}
+						},
+						{
+							"fullDescription": {
+								"text": "The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component."
+							},
+							"guid": "1a37bf66-7c5a-3aa0-94bb-ffae58a9e01c",
+							"helpUri": "https://cwe.mitre.org/data/definitions/78.html",
+							"id": "78",
+							"shortDescription": {
+								"text": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+							}
+						}
+					],
+					"version": "4.4"
+				}
+			],
+			"tool": {
+				"driver": {
+					"guid": "8b518d5f-906d-39f9-894b-d327b1a421c5",
+					"informationUri": "https://github.com/securego/gosec/",
+					"name": "gosec",
+					"rules": [
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal"
+							},
+							"help": {
+								"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal\nSeverity: HIGH\nConfidence: MEDIUM\n"
+							},
+							"id": "G122",
+							"name": "Time-of-check Time-of-use (TOCTOU) Race Condition",
+							"properties": {
+								"precision": "medium",
+								"tags": [
+									"security",
+									"HIGH"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "2cfefdd6-0467-39aa-9989-3c59fde595cd",
+										"id": "367",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Filesystem operation in filepath.Walk/WalkDir callback uses race-prone path; consider root-scoped APIs (e.g. os.Root) to prevent symlink TOCTOU traversal"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Subprocess launched with variable"
+							},
+							"help": {
+								"text": "Subprocess launched with variable\nSeverity: MEDIUM\nConfidence: HIGH\n"
+							},
+							"id": "G204",
+							"name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"MEDIUM"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "1a37bf66-7c5a-3aa0-94bb-ffae58a9e01c",
+										"id": "78",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Subprocess launched with variable"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Expect directory permissions to be 0750 or less"
+							},
+							"help": {
+								"text": "Expect directory permissions to be 0750 or less\nSeverity: MEDIUM\nConfidence: HIGH\n"
+							},
+							"id": "G301",
+							"name": "Incorrect Default Permissions",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"MEDIUM"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "fca8970d-b44c-3162-a385-cc09266d12a4",
+										"id": "276",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Expect directory permissions to be 0750 or less"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Expect file permissions to be 0600 or less"
+							},
+							"help": {
+								"text": "Expect file permissions to be 0600 or less\nSeverity: MEDIUM\nConfidence: HIGH\n"
+							},
+							"id": "G302",
+							"name": "Incorrect Default Permissions",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"MEDIUM"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "fca8970d-b44c-3162-a385-cc09266d12a4",
+										"id": "276",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Expect file permissions to be 0600 or less"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Potential file inclusion via variable"
+							},
+							"help": {
+								"text": "Potential file inclusion via variable\nSeverity: MEDIUM\nConfidence: HIGH\n"
+							},
+							"id": "G304",
+							"name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"MEDIUM"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "3e718404-88bc-3f17-883e-e85e74078a76",
+										"id": "22",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Potential file inclusion via variable"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Expect WriteFile permissions to be 0600 or less"
+							},
+							"help": {
+								"text": "Expect WriteFile permissions to be 0600 or less\nSeverity: MEDIUM\nConfidence: HIGH\n"
+							},
+							"id": "G306",
+							"name": "Incorrect Default Permissions",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"MEDIUM"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "fca8970d-b44c-3162-a385-cc09266d12a4",
+										"id": "276",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Expect WriteFile permissions to be 0600 or less"
+							}
+						},
+						{
+							"defaultConfiguration": {
+								"level": "error"
+							},
+							"fullDescription": {
+								"text": "Path traversal via taint analysis"
+							},
+							"help": {
+								"text": "Path traversal via taint analysis\nSeverity: HIGH\nConfidence: HIGH\n"
+							},
+							"id": "G703",
+							"name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+							"properties": {
+								"precision": "high",
+								"tags": [
+									"security",
+									"HIGH"
+								]
+							},
+							"relationships": [
+								{
+									"kinds": [
+										"superset"
+									],
+									"target": {
+										"guid": "3e718404-88bc-3f17-883e-e85e74078a76",
+										"id": "22",
+										"toolComponent": {
+											"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+											"name": "CWE"
+										}
+									}
+								}
+							],
+							"shortDescription": {
+								"text": "Path traversal via taint analysis"
+							}
+						}
+					],
+					"semanticVersion": "dev",
+					"supportedTaxonomies": [
+						{
+							"guid": "f2856fc0-85b7-373f-83e7-6f8582243547",
+							"name": "CWE"
+						}
+					],
+					"version": "dev"
+				}
+			}
+		}
+	],
+	"$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+	"version": "2.1.0"
+}
