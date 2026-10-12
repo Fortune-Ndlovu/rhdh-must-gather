@@ -26,7 +26,7 @@ LOCALBIN ?= $(shell pwd)/bin
 GOSEC ?= $(LOCALBIN)/gosec
 
 # Tool Versions
-GOSEC_VERSION ?= v2.27.1
+GOSEC_VERSION ?= v2.29.0
 
 # Gosec options - default format is sarif so we can integrate with Github code scanning
 GOSEC_FMT ?= sarif  # for other options, see https://github.com/securego/gosec#output-formats
